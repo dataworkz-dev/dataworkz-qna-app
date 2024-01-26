@@ -12,6 +12,10 @@ Put your Api Key in `Environment.ts` file.
 
 ## Development server
 
+## Node version
+
+Node version `16.10.0`
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
