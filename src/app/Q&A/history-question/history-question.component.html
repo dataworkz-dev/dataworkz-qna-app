@@ -1,0 +1,90 @@
+<div *ngIf="!showLoader" class="historyQuestionWrapperDiv">
+    <div class="questionTextDiv">
+        <span style="color: #777777; font-size: 20px;">Question: </span>
+        <span style="color: #393A3D; font-size: 20px; font-weight: 700;">{{question}}</span>
+        <span (click)="goToMainPage()" style="position: fixed;
+            right: 0; cursor: pointer; top: 20px;">
+                <img width="40" height="40" src="./../../../assets/plus.svg" alt="cancel" />
+            </span>
+    </div>
+    <div class="responseWrapper">
+        <div class="promptSourceDiv">
+            <div class="sourceList">
+                <div style="cursor: pointer; font-size: 14px; font-weight: 600;" (click)="setShowSource()"><span><img style="vertical-align: middle;" src='./../../../assets/collapsibleOpen.svg' alt="drawer" width="15" height="15"/> </span><span>Sources({{sourceData.length}})</span></div>
+                <div *ngIf="showSource">
+                    <div *ngFor="let source of sourceData" class="sourceDiv">
+                        <a style="font-size: 12px; font-weight: 400; text-decoration: none; color: #0966CE;" [href]="source.link" [title]="source.link" target="_blank">{{reduceDataLength(source.link, 20)}}</a>
+                        <div class="sourceText" (click)="openSource(source)" style="white-space: pre-wrap; margin-top: 10px; font-size: 12px; font-weight: 400; cursor: pointer;">{{reduceDataLength(source.data, 40)}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="promptDiv">
+                <div style="font-weight: 600; font-size: 18px; margin-bottom: 10px;">Prompt:</div>
+                {{prompt}}
+            </div>
+        </div>
+        <div class="aiResponseDiv">
+            <div style="margin-top: 20px">
+                <div class="aiResponseText">AI Response</div>
+                <div class="providerText">LLM Provider: <span style="font-size: 14px; color: #000000; font-weight: 500;">{{llmProvider}}</span></div>
+            </div>
+            <div class="matricesDiv">
+                <div class="retrievalDiv">
+                    <div style="margin-bottom: 10px; font-size: 15px; font-weight: 500;">RETRIEVAL</div>
+                    <div style="float: left; width: 55%; margin-bottom: 15px; color: #7A7A7A; font-size: 13px; font-weight: 500;">
+                        Context Relevance
+                    </div>
+                    <div style="float: right; width: 40%; margin-bottom: 15px; color: #7A7A7A; font-size: 13px; font-weight: 500;">
+                        Context Recall
+                    </div>
+                    <div style="float: left; width: 55%; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: #565656;">
+                        {{retrivalRelevance}}
+                    </div>
+                    <div style="float: right; width: 40%; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: #565656;">
+                        {{retrivalContextRecall}}
+                    </div>
+                </div>
+                <div class="generationDiv">
+                    <div style="margin-bottom: 10px; font-size: 15px; font-weight: 500;">GENERATION</div>
+                    <div style="float: left; width: 45%; margin-bottom: 15px; color: #7A7A7A; font-size: 13px; font-weight: 500;">
+                        Groundedness
+                    </div>
+                    <div style="float: right; width: 55%; margin-bottom: 15px; color: #7A7A7A; font-size: 13px; font-weight: 500;">
+                        Correctness evaluator
+                    </div>
+                    <div style="float: left; width: 45%; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: #565656;">
+                        {{generationGroundedness}}
+                    </div>
+                    <div style="float: right; width: 55%; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: #565656;">
+                        {{generationCorrectness}}
+                    </div>
+                    <div style="float: left; width: 45%; margin-bottom: 15px; color: #7A7A7A; font-size: 13px; font-weight: 500;">
+                        Answer relevance
+                    </div>
+                    <div style="float: right; width: 55%; margin-bottom: 15px; color: #7A7A7A; font-size: 13px; font-weight: 500;">
+                        Confidence score
+                    </div>
+                    <div style="float: left; width: 45%; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: #565656;">
+                        {{generationRelevance}}
+                    </div>
+                    <div style="float: right; width: 55%; margin-bottom: 15px; font-size: 13px; font-weight: 700; color: #565656;">
+                        {{generationConfidenceScore}}
+                    </div>
+                </div>
+            </div>
+            <div class="responseDiv">
+                <div *ngFor="let res of formattedResponse; let i = index">
+                    <div class="hljsDiv" style="overflow: auto;" *ngIf="i % 2 == 1">
+                        <textarea highlight-js options="{}">{{res}}</textarea>
+                    </div>
+                    <div *ngIf="i % 2 == 0">
+                        {{res}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="showLoader" style="height: 100vh;">
+    <div class="loader"></div>
+</div>

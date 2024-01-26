@@ -1,0 +1,16 @@
+<router-outlet></router-outlet>
+<div *ngIf="showError">
+    <div style="
+    width: 400px;
+    position: fixed;
+    top: 10px;
+    right: calc(50vw - 200px);
+    border: 2px solid red;
+    padding: 10px;
+    height: fit-content;
+    background: #ffccbb;
+    border-radius: 5px;">
+        {{errorMessage}}
+
+    </div>
+</div>

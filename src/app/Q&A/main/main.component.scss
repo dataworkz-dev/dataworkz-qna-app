@@ -1,0 +1,197 @@
+.mainDiv {
+    height: 100vh;
+    background-color: rgb(246, 247, 252);
+    overflow: hidden;
+}
+
+.leftDrawer {
+    width: 300px;
+    overflow: auto;
+    float: left;
+    height: 100%;
+    border-right: 1px solid #E9EBF2;
+    background: #E9EBF2;
+    box-shadow: 0px 4px 8px 0px #CFCFCF inset;
+    padding: 15px;
+}
+
+.qaDiv {
+    height: 100%;
+    overflow: hidden;
+    padding: 10px;
+}
+
+
+.collapseImg {
+    margin-left: 10px;
+    float: left;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.knowledgeSearchDiv {
+    border-radius: 8px;
+    border: 1px solid #DDDDDD;
+    background: #FFFFFF;
+    margin-top: 15px;
+    margin-left: 20px;
+    padding: 15px;
+    margin-right: 20px;
+    padding-left: 25px;
+}
+
+.llmProviderText {
+    margin-left: 30px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #7D7D7D;
+}
+
+.llmSelectDiv {
+    margin-bottom: 15px;
+}
+
+.filterImg {
+    vertical-align: sub;
+    margin-right: 5px;
+}
+
+.knowledgeSearchText {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #000000;
+}
+
+.knowledgeSearchInput {
+    width: 95%;
+    height: 30px;
+    border: 1px solid #A2A6B3;
+    border-radius: 6px;
+    padding-left: 10px;
+    font-size: 16px; 
+    font-weight: 400; 
+    line-height: 22px; 
+    letter-spacing: 0px; 
+    transition: 0.5s ease-in;
+}
+
+.knowledgeSearchInput:focus {
+    border: 1px solid #80bdff;
+}
+
+.knowledgeSearchInputDiv {
+    margin-bottom: 10px;
+}
+
+.searchBtnDiv {
+    margin-bottom: 10px;
+}
+
+.searchBtn {
+    height: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 4px;
+    background: #014CE6;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #014CE6;
+}
+
+.responseWrapperDiv {
+    height: 540px;
+    border: 1px solid #DDDDDD;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin-left: 20px;
+    margin-top: 25px;
+    padding: 15px;
+    float: left;
+    line-height: 1.5;
+}
+
+.sourceDiv {
+    margin-left: 15px;
+}
+
+.sourceWrapperDiv {
+    padding: 10px;
+    margin-top: 15px;
+    max-height: 515px;
+    overflow: auto;
+    border: 1px solid #CAC1F4;
+    border-radius: 8px;
+    margin-right: 25px;
+}
+
+.sourceListDiv {
+    width: 22%;
+    float: right;
+}
+
+.monthDiv {
+    margin-bottom: 10px;
+    font-size: 15px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    color: rgb(145, 152, 176);
+    font-weight: 400;
+}
+
+.questionDiv {
+    height: fit-content;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(190, 195, 215);
+    margin: 10px auto 10px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(19, 19, 19);
+    cursor: pointer;
+    vertical-align: text-top;
+}
+
+.qaSystemText {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #7D7D7D;
+}
+
+.qaName {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #000000;
+}
+
+.sourceSampleText:hover {
+    background-color: #F2D9FF;
+}
+
+.hljsDiv {
+    padding: 10px;
+    overflow: auto;
+}

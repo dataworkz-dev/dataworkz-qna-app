@@ -1,0 +1,119 @@
+.historyQuestionWrapperDiv {
+    height: 100vh;
+    background-color: rgb(246, 247, 252);
+    overflow: hidden;
+}
+
+.questionTextDiv {
+    background: white;
+    box-shadow: 0px 4px 4px 0px #C3C3C340;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.responseWrapper {
+
+    .promptSourceDiv {
+        width: 45%;
+        height: 70vh;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        display: inline-block;
+        padding: 20px;
+        .sourceDiv {
+            background-color: white;
+            width: 27%;
+            max-height: 515px;
+            overflow: auto;
+            border: 1px solid #CAC1F4;
+            border-radius: 8px;
+            margin-right: 5px;
+            display: inline-block;
+            padding: 10px;
+            margin-top: 10px;
+            min-height: 70px;
+        }
+
+        .sourceList {
+            background-color: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px 0px #82828240;
+        }
+
+        
+    }
+
+    .aiResponseDiv {
+        width: 45%;
+        display: inline-block;
+        background-color: white;
+        height: 70vh;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        padding: 20px;
+        padding-top: 0;
+        margin-left: 15px;
+        box-shadow: 0px 0px 20px 0px #82828240;
+        border-radius: 15px;
+    }
+}
+
+.aiResponseText {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.providerText {
+    display: inline-block;
+    float: right;
+    color: #7D7D7D;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.matricesDiv {
+    margin-top: 15px;
+    background: #FCF6FF;
+    border: 1px solid #F2D9FF;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    height: 140px;
+}
+
+.retrievalDiv {
+    float: left;
+    width: 45%;
+    border-right: 1px solid #EAD3F3;
+    height: 100%;
+
+}
+
+.generationDiv {
+    float: right;
+    width: 52%;
+}
+
+.responseDiv {
+    white-space: pre-wrap;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.promptDiv {
+    margin-top: 20px;
+    white-space: pre-wrap;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.sourceText:hover {
+    background-color: #F2D9FF;
+}

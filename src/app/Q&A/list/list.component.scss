@@ -1,0 +1,99 @@
+.search {
+    border-radius: 100px;
+    border: 1px solid #ced4da;
+    width: 90%; 
+    height: 41px; 
+    font-size: 16px; 
+    font-weight: 400; 
+    line-height: 22px; 
+    letter-spacing: 0px; 
+    text-align: left; 
+    color: #5E5E5E;
+    padding-left: 15px;
+    transition: 0.5s ease-in;
+
+}
+.search:focus {
+    border: 1px solid #80bdff;
+}
+
+.wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+.listDiv::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .listDiv {
+    height: 90vh;
+    padding-left: 30px;
+    padding-right: 30px; 
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .cardDiv {
+    height: 100%;
+    border: 2px solid #D9D9D9;
+    box-shadow: -2px 2px 2px 0px #EAEAEA;
+    background: linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    overflow: hidden; border-radius: 10px; 
+  }
+
+  .cardDiv:hover {
+    border: 2px solid #5687D0;
+    cursor: pointer;
+}
+
+.wrapperDiv {
+  background-color: #F4F5F8;
+}
+
+.header {
+  height: 10vh;
+  background-color: white; 
+  box-shadow: 0px 4px 4px rgba(201, 201, 201, 0.25);
+}
+
+.logo {
+  margin-top: 2vh; 
+  height: 6vh;
+}
+
+.knowledgeBaseDiv {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 30.5px; 
+  padding-top: 20px;
+  padding-left: 15px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.selectSystemDiv {
+  width: 65%; 
+  float: left;
+  padding-left: 15px;
+  p {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #000000;
+    text-align: left;
+  }
+}
+
+.inputDiv {
+  width: 30%; 
+  float: right;
+}

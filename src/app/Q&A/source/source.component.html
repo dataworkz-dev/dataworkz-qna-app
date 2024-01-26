@@ -1,0 +1,28 @@
+<div style="height: 100vh; background-color: rgb(246, 247, 252); overflow: hidden;">
+
+    <div style="height: 800px; width: 840px; margin: auto;    margin-top: 50px;">
+        <div style="font-size: 18px;
+        margin-bottom: 15px;
+        font-weight: 700;">
+            <span style="float:left; line-height: 50px;">Source Details</span>
+            <span style="float: right; cursor: pointer;" (click)="backToMainPage()"><img height="40" width="40" src="./../../../assets/plus.svg" alt="cancel" /> </span>
+        </div>
+        <div style="border-radius: 8px;
+        border: 1px solid #DDDDDD;
+        background: #FFFFFF; height: 700px; overflow-x: hidden; width: 800px; padding: 20px;">
+        <div style="border-bottom: 1px solid #CAC1F4;
+        margin-bottom: 20px;
+        padding-bottom: 10px;">
+            <span style="font-size: 14px;">Collection name:</span>
+            <span style="font-size: 14px; color: #9D9D9D; margin-right: 10px;"> {{collectionName}}</span>
+            <span style="font-size: 14px;">Dataset name:</span>
+            <span style="font-size: 14px; color: #9D9D9D; margin-right: 10px;"> {{datasetName}} </span>
+            <span style="font-size: 14px;">Column name:</span>
+            <span style="font-size: 14px; color: #9D9D9D; margin-right: 10px;"> {{columnName}} </span>
+        </div>
+        <div style="overflow-x: auto; white-space: pre-wrap; font-size: 14px; line-height: 1.5;">
+            {{sourceData}}
+        </div>
+        </div>
+    </div>
+</div>

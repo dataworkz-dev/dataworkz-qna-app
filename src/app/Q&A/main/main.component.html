@@ -1,0 +1,78 @@
+<div *ngIf="showLoader" style="height: 100vh;">
+    <div class="loader"></div>
+</div>
+<div *ngIf="!showLoader" class="mainDiv">
+    <div [ngClass]="drawerOpened ? 'show' : 'hide'" class="leftDrawer">
+        <div *ngFor="let question of questionList">
+            <div class="monthDiv">{{question.month}}</div>
+            <div class="questionDiv" *ngFor="let q of question.list">
+                <span style="margin-right: 5px;"><img src="./../../../assets/Vector.svg" alt="question"/></span>
+                <span (click)="openHistoryQuestion(q.questionId)" [title]="q.question"> {{reduceDataLength(q.question, 30)}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="qaDiv">
+        <div style="height: 35px;
+        padding-top: 15px;">
+            <span><img class="collapseImg" [src]="collapseImageSrc" (click)="openOrCloseDrawer()" (mouseover)="changeImgIcon()" (mouseout)="resetImgIcon()"/></span>
+            <span style="font-size: 16px;
+            font-weight: 700;line-height: 25px;"> KNOWLEDGE BASE</span>
+            <span style="position: fixed;
+            right: 0; cursor: pointer;" (click)="backToListPage()">
+                <img width="40" height="40" src="./../../../assets/plus.svg" alt="cancel" />
+            </span>
+        </div>
+        <div class="knowledgeSearchDiv">
+            
+            <div class="llmSelectDiv">
+                <span class="qaSystemText">Q&A System: </span>
+                <span class="qaName">{{qnaName}}</span>
+                <span class="llmProviderText">LLM Provider:</span>
+                <span>
+                    <select class="qaName" style="border: 1px solid #F2D9FF;
+                    border-radius: 5px;
+                    height: 25px;
+                    background: white;
+                    margin-left: 5px;" [(ngModel)]="selectedLlm">
+                        <option value="llm">Select LLM</option>
+                        <option *ngFor="let llm of llmProviders" [value]="llm.id">{{llm.name}}</option>
+                    </select>
+                </span>
+            </div>
+            <div class="knowledgeSearchText">
+                <span><img class="filterImg" src="./../../../assets/executedFilter.svg" alt="filter image"></span>
+                <span>Knowledge Search</span>
+            </div>
+            <div class="knowledgeSearchInputDiv">
+                <input type="text" class="knowledgeSearchInput" [(ngModel)]="question" (keyup.enter)="askQuestion()">
+            </div>
+            <div class="searchBtnDiv">
+                <button type="submit" class="searchBtn" (click)="askQuestion()">Search</button>
+            </div>
+        </div>
+        <div *ngIf="showResponseDiv">
+            <div #scrollMe class="responseWrapperDiv">
+                <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">
+                    AI Response
+                </div>
+                <div *ngFor="let res of formattedResponse; let i = index" style="white-space: pre-wrap; font-size: 15px;">
+                    <!-- {{this.response}} -->
+                    <div class="hljsDiv" style="overflow: auto;" *ngIf="i % 2 == 1">
+                        <textarea highlight-js options="{}">{{res}}</textarea>
+                    </div>
+                    <div *ngIf="i % 2 == 0">
+                        {{res}}
+                    </div>
+                </div>
+            </div>
+            <div class="sourceListDiv" style="margin-left: 15px; margin-top: 30px;">Source
+            <div *ngFor="let source of sourceData" class="sourceWrapperDiv">
+                <a style="font-size: 12px; font-weight: 400; text-decoration: none; color: #0966CE;" [href]="source.link" [title]="source.link" target="_blank">{{reduceDataLength(source.link, 25)}}</a>
+                <div class="sourceSampleText" (click)="openSource(source)" style="white-space: pre-wrap; margin-top: 10px; font-size: 12px; font-weight: 400; cursor: pointer;">{{reduceDataLength(source.data, 50)}}</div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
