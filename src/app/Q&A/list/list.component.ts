@@ -20,34 +20,31 @@ export class ListComponent implements OnInit {
     this.apiService.response = [];
     this.apiService.sourceData = [];
     this.apiService.question = '';
-    this.getQnaSystems();
+    this.checkIfTokenExists(this.getQnaSystems);
   }
 
-  getQnaSystems() {
-    this.apiService.response = [];
-    this.apiService.sourceData = [];
-    this.listOfQna = [];
-    this.originalListOfQna = [];
-    this.apiService.loader.subscribe((load) => {
-      this.showLoader = load;
+  getQnaSystems(that: any) {
+    that.apiService.response = [];
+    that.apiService.sourceData = [];
+    that.listOfQna = [];
+    that.originalListOfQna = [];
+    that.apiService.loader.subscribe((load: any) => {
+      that.showLoader = load;
     });
-    this.apiService.loader.next(true);
-    this.apiService.getQnaSystems().subscribe((response) => {
+    that.apiService.loader.next(true);
+    that.apiService.getQnaSystems().subscribe((response: any) => {
       let keys = Object.keys(response);
       if(keys && keys.length) {
         keys.forEach((key: string) => {
-          // call api to get details of the Qna.
-          this.apiService.getQnaDetails(key).subscribe((details: any) => {
+          that.apiService.getQnaDetails(key).subscribe((details: any) => {
             if(details) {
-              this.listOfQna.push(details)
-              this.originalListOfQna.push(details);
+              that.listOfQna.push(details)
+              that.originalListOfQna.push(details);
             }
-            this.apiService.loader.next(false);
+            that.apiService.loader.next(false);
           })
         })
       }
-      
-      
     });
   }
 
@@ -66,6 +63,21 @@ export class ListComponent implements OnInit {
     }
     if(this.searchTerm == '') {
       this.listOfQna = JSON.parse(JSON.stringify(this.originalListOfQna))
+    }
+  }
+
+  checkIfTokenExists(callMethod: any) {
+    if(this.apiService.authToken && this.apiService.authToken.length) {
+      callMethod(this);
+    } else {
+      this.apiService.getToken().subscribe((text: any) => {
+        if(text) {
+          text = String(text);
+          text = text.replace(/\s/g,'');
+          this.apiService.authToken = 'SSWS ' + text;
+          callMethod(this);
+        }
+      })
     }
   }
 

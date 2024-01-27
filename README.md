@@ -1,39 +1,17 @@
-# QnA
+## Running the sample QnA app.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.2.
+1. Clone Repository dataworkz-qna-app using `git clone https://github.com/dataworkz-dev/dataworkz-qna-app.git` .
 
-## Install Dependencies
+2. If required, install node.js for your platform (Node Version > 16.0.0).
 
-Run `npm install` to install dependencies.
+3. Run `npm install` to install dependencies.
 
-## Api Key
+4. You will need a Dataworkz API Key to access the Dataworkz RAG QnA Service. Here are the steps to [generate an API Key](generate-api-key).
 
-Put your Api Key in `Environment.ts` file.
+5. Place your generated API Key in `token.txt` file. 
+You can find the file at `src/assets/token.txt`.
 
-## Node version
+6. Run `npm run start` to run a local web server that hosts the sample QnA application. To access the application, open a browser and navigate to `http://localhost:4200` 
 
-Node version `16.10.0`
+Please report any issues with the sample QnA application in [Issues](https://github.com/dataworkz-dev/dataworkz-qna-app/issues) 
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

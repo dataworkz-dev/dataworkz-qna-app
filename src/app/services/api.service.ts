@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParameterCodec, HttpResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, catchError, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +11,38 @@ export class ApiService {
   public question: any;
   public error = new BehaviorSubject('');
   public loader = new BehaviorSubject(false);
+  public authToken = '';
   constructor(private http: HttpClient) { }
+
+  getToken() {
+    let url = 'assets/token.txt';
+    return this.http.get(url, { responseType: 'text'}).pipe(
+      catchError(err => {
+        this.loader.next(false);
+        this.error.next('something unexpected happened');
+        return of([]);
+      }));
+  }
+
+  getQnaSystemsWrapper() {
+    if(this.authToken && this.authToken.length) {
+      this.getQnaSystems();
+    } else {
+      this.getToken().subscribe((text: any) => {
+        if(text) {
+          text = String(text);
+          text = text.replace(/\s/g,'');
+          this.authToken = text;
+          this.getQnaSystems();
+        }
+      })
+    }
+  }
 
   getQnaSystems() {
     const headersSet = new HttpHeaders({
       'Accept': 'application/json',
-      'Authorization': environment.authToken
+      'Authorization': this.authToken
     });
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems', {headers : headersSet}).pipe(
       catchError(err => {
@@ -31,7 +56,7 @@ export class ApiService {
   getLlmProviders(id: string) {
     const headersSet = new HttpHeaders({
       'Accept': 'application/json',
-      'Authorization': environment.authToken
+      'Authorization': this.authToken
     });
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id +'/llm-providers', {headers : headersSet}).pipe(
       catchError(err => {
@@ -45,7 +70,7 @@ export class ApiService {
   getQnaDetails(id: string) {
     const headersSet = new HttpHeaders({
       'Accept': 'application/json',
-      'Authorization': environment.authToken
+      'Authorization': this.authToken
     });
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id, {headers : headersSet}).pipe(
       catchError(err => {
@@ -62,7 +87,7 @@ export class ApiService {
 
     const headersSet = new HttpHeaders({
       'Accept': 'application/json',
-      'Authorization': environment.authToken
+      'Authorization': this.authToken
     });
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id + '/questionshistory', {headers : headersSet}).pipe(
       catchError(err => {
@@ -80,7 +105,7 @@ export class ApiService {
 
     const headersSet = new HttpHeaders({
       'Accept': 'application/json',
-      'Authorization': environment.authToken
+      'Authorization': this.authToken
     });
     return this.http.get(url, {headers: headersSet}).pipe(
       catchError(err => {
@@ -96,7 +121,7 @@ export class ApiService {
 
     const headersSet = new HttpHeaders({
       'Accept': 'application/json',
-      'Authorization': environment.authToken
+      'Authorization': this.authToken
     });
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id + '/questions/' + questionId, {headers : headersSet}).pipe(
       catchError(err => {
@@ -105,7 +130,21 @@ export class ApiService {
         console.log('Handling error locally and rethrowing it...', err);
         return of([]);
       }));
+  }
 
+  checkIfTokenExists(callMethod: any) {
+    if(this.authToken && this.authToken.length) {
+      callMethod();
+    } else {
+      this.getToken().subscribe((text: any) => {
+        if(text) {
+          text = String(text);
+          text = text.replace(/\s/g,'');
+          this.authToken = 'SSWS ' + text;
+          callMethod();
+        }
+      })
+    }
   }
 
 }

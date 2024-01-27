@@ -3,6 +3,8 @@
 </div>
 <div *ngIf="!showLoader" class="mainDiv">
     <div [ngClass]="drawerOpened ? 'show' : 'hide'" class="leftDrawer">
+        <div style="text-align: center;
+        margin-top: 35vh;" *ngIf="!questionList || questionList.length == 0">User has not asked any questions.</div>
         <div *ngFor="let question of questionList">
             <div class="monthDiv">{{question.month}}</div>
             <div class="questionDiv" *ngFor="let q of question.list">
