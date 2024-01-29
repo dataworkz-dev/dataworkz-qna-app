@@ -1,4 +1,9 @@
-## Running the sample QnA app.
+# What is Dataworkz?
+Dataworkz empowers businesses to effortlessly develop Retrieval Augmented Generation (RAG) applications using proprietary data, utilizing either public LLM APIs or privately hosted open source foundation models.
+
+## Running the sample QnA app
+This repo provides a sample QnA application powered by the Dataworkz that demonstrates the power of RAG on several datasets. Datasets have been pre-configured and are available with vector emebeddings queryable via a MongoDB vector datab ase and several popular LLMs. In this section, we will show you how to get the sample QnA application running on your local machine.
+
 
 1. Clone Repository dataworkz-qna-app using `git clone https://github.com/dataworkz-dev/dataworkz-qna-app.git` .
 
@@ -15,6 +20,19 @@ You can find the file at `src/assets/token.txt`.
    
 Please report any issues with the sample QnA application in [Issues](https://github.com/dataworkz-dev/dataworkz-qna-app/issues) 
 
+## Dataworkz RAG Builder
+Dataworkz’s RAG builder streamlines building GenAI applications to remove the complexity associated with stitching together a turnkey solution. A composable AI stack provides the ability to choose the vector database, embedding model, chunking strategy and LLM model. You have the flexibility use public LLM APIs including AWS Bedrock and OpenAI or host an open-source model in a VPC.
+
+For Advanced RAG applications, Dataworkz provides the ability to combine lexical and semantic search with metadata filtering thereby enabling RAG apps to process large volumes of unstructured, semi-structured or structured data. 
+
+### Connecting to your data
+Dataworkz connects to different sources of business data - SaaS services, relational databases, NoSQL databases, files stored in cloud object stores and provides no-code transformations to make proprietary data in any format ready for LLM applications. When combining data from multiple sources, you can also configure the precedence order for input sources used to build the context for generating LLM response. The complete list of connectors is available [here](https://www.dataworkz.com/connectors/). 
+
+### API for embedding RAG into your application/workflows
+RAG builder provides an API for any developer to embed GenAI applications into their existing workflow with complete flexibility to customize the look and feel. The sample application in this repo leverages this API for its functionality. We have a section on the API integration into this app as well as how to use it in your own applications.
+
+### Hallucinations and RAG
+The emergence of hallucinations presents a notable obstacle in the widespread adoption of Gen AI within enterprises. Dataworkz  enables GenAI to reference its origins, consequently enhancing traceability.
 
 ## API Usage Notes
 In this section, we provide some developer notes on how the sample application was built and what [APIs](https://docs.dataworkz.com/product-docs/api) were used to power various sections. You can try out the API and Question and Answer system integrated into your own application. You can generate an API Key (if already generated, the same key can be used) and connect to this service.
@@ -25,7 +43,7 @@ The example QnA application connects to `https://mongodb.dataworkz.com` as the b
 Please refer to the [API Key Generation](https://docs.dataworkz.com/product-docs/api-key-generation/generate-api-key-in-dataworkz) section on how to get an API Key and how to use it to invoke Dataworkz QnA APIs. In the example QnA application, the API token is passed in the `Authentication` header using the form `SWSS <api-key>`.
 
 ### Listing QnA systems
-Dataworkz supports configuring multiple, isolated QnA systems. QnA systems are used as domains of Question and Answer systems and can be leveraged for separation amongst multiple projects, groups of sources, large language models, versions, or different unrelated sub-domains in a project, etc. An application may have one or more QnA systems. When a question is asked, it is asked against a specific QnA system. 
+Dataworkz RAG Builder supports configuring multiple, isolated QnA systems. QnA systems are used as domains of Question and Answer systems and can be leveraged for separation amongst multiple projects, groups of sources, large language models, versions, or different unrelated sub-domains in a project, etc. An application may have one or more QnA systems. When a question is asked, it is asked against a specific QnA system. 
 
 The QnA example application  starts out with listing all the QnA systems (as cards) for the user to select the one she is interested in. Application developers can choose to list the systems for user selection or if the choice is clear from the context then set it up in code. 
 
@@ -36,10 +54,9 @@ The selected QnA systemId will be needed in subsequent APIs.
 Information on each individual QnA system is retrieved using this API - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid). This is used in the example QnA application to populate the individual QnA system cards.
 
 ### Large Language Model (LLM) Providers
-Questions are answered by LLMs configured in Dataworkz. LLMs configured for sample systems are OpenAI GPT 3.5, a privately hosted Llama-2 model, and Google's Gemini Pro (this list could change in the future). This API provides a list of configured LLMProviders by QnA system - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/llm-providers](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-llm-providers)
+Questions are answered by LLMs configured in the Dataworkz RAG Builder. LLMs configured for sample systems are OpenAI GPT 3.5, a privately hosted Llama-2 model, and Google's Gemini Pro (this list could change in the future). This API provides a list of configured LLMProviders by QnA system - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/llm-providers](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-llm-providers)
 
 The example QnA application uses this to populate the LLMProviders drop down to allow the user to select the LLM they want to use to answer the question.
-
 You should store the id of the LLMProvider you wish to use to ask questions to. Questions can be asked to specific LLM providers identified by the `llmProviderId` returned by this API call.
 
 ### Asking a question
@@ -51,7 +68,7 @@ This API needs the `systemId` of the QnA system you are targetting and the `llmP
 The example QnA application provides a list of previously asked questions from a QnA system. This is a convenience method for users to look at previously answered questions. The following API is used - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId)/questionshistory](https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/questionshistory)
 
 #### Previously Answered Questions
-Dataworkz provides a list of previously answered questions alongwith additional scores and analysis on the quality of the answer. Read more about this here. The example QnA application uses this API to provide details on each answered question - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/questions/{questionId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-questions-questionid)
+Dataworkz provides a list of previously answered questions along with additional scores and analysis on the quality of the answer. Read more about this here. The example QnA application uses this API to provide details on each answered question - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/questions/{questionId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-questions-questionid)
 
 
 
