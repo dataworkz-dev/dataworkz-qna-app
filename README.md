@@ -23,6 +23,8 @@ Dataworkz simplifies RAG app development for businesses. Dataworkz offers RAG as
 ## Dataworkz RAG Builder
 Dataworkz’s RAG builder streamlines building GenAI applications to remove the complexity associated with stitching together a turnkey solution. A composable AI stack provides the ability to choose the vector database, embedding model, chunking strategy and LLM model. You have the flexibility use public LLM APIs including AWS Bedrock and OpenAI or host an open-source model in a VPC.
 
+![](Dataworkz-RAG-Builder.png)
+
 For Advanced RAG applications, Dataworkz provides the ability to combine lexical and semantic search with metadata filtering thereby enabling RAG apps to process large volumes of unstructured, semi-structured or structured data. 
 
 ### Connecting to your data
