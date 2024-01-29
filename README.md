@@ -1,9 +1,6 @@
-# What is Dataworkz?
-Dataworkz empowers businesses to effortlessly develop Retrieval Augmented Generation (RAG) applications using proprietary data, utilizing either public LLM APIs or privately hosted open source foundation models.
-
-## Running the sample QnA app
-This repo provides a sample QnA application powered by the Dataworkz that demonstrates the power of RAG on several datasets. Datasets have been pre-configured and are available with vector emebeddings queryable via a MongoDB vector datab ase and several popular LLMs. In this section, we will show you how to get the sample QnA application running on your local machine.
-
+# Running the Dataworkz Sample QnA Application
+This repo provides a sample QnA application powered by the Dataworkz RAG Builder that demonstrates the power of RAG on several datasets. In this section, we will show you how to get the sample QnA application running on your local machine.
+Jump here to learn more about [Dataworkz RAG Builder](#what-is-dataworkz)
 
 1. Clone Repository dataworkz-qna-app using `git clone https://github.com/dataworkz-dev/dataworkz-qna-app.git` .
 
@@ -19,6 +16,9 @@ You can find the file at `src/assets/token.txt`.
 6. Run `npm run start` to run a local web server that hosts the sample QnA application. To access the application, open a browser and navigate to `http://localhost:4200`
    
 Please report any issues with the sample QnA application in [Issues](https://github.com/dataworkz-dev/dataworkz-qna-app/issues) 
+
+# What is Dataworkz?
+Dataworkz empowers businesses to effortlessly develop Retrieval Augmented Generation (RAG) applications using proprietary data, utilizing either public LLM APIs or privately hosted open source foundation models.
 
 ## Dataworkz RAG Builder
 Dataworkz’s RAG builder streamlines building GenAI applications to remove the complexity associated with stitching together a turnkey solution. A composable AI stack provides the ability to choose the vector database, embedding model, chunking strategy and LLM model. You have the flexibility use public LLM APIs including AWS Bedrock and OpenAI or host an open-source model in a VPC.
