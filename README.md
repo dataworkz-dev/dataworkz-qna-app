@@ -18,7 +18,7 @@ You can find the file at `src/assets/token.txt`.
 Please report any issues with the sample QnA application in [Issues](https://github.com/dataworkz-dev/dataworkz-qna-app/issues) 
 
 # What is Dataworkz?
-Dataworkz empowers businesses to effortlessly develop Retrieval Augmented Generation (RAG) applications using proprietary data, utilizing either public LLM APIs or privately hosted open source foundation models.
+Dataworkz simplifies RAG app development for businesses. Dataworkz offers RAG as a Service so that you can build GenAI applications using proprietary data, utilizing either public LLM APIs or privately hosted open source foundation models.
 
 ## Dataworkz RAG Builder
 Dataworkz’s RAG builder streamlines building GenAI applications to remove the complexity associated with stitching together a turnkey solution. A composable AI stack provides the ability to choose the vector database, embedding model, chunking strategy and LLM model. You have the flexibility use public LLM APIs including AWS Bedrock and OpenAI or host an open-source model in a VPC.
@@ -32,7 +32,7 @@ Dataworkz connects to different sources of business data - SaaS services, relati
 RAG builder provides an API for any developer to embed GenAI applications into their existing workflow with complete flexibility to customize the look and feel. The sample application in this repo leverages this API for its functionality. We have a section on the API integration into this app as well as how to use it in your own applications.
 
 ### Hallucinations and RAG
-The emergence of hallucinations presents a notable obstacle in the widespread adoption of Gen AI within enterprises. Dataworkz  enables GenAI to reference its origins, consequently enhancing traceability.
+The emergence of hallucinations presents a notable obstacle in the widespread adoption of Gen AI within enterprises. Dataworkz enables GenAI to reference its origins, consequently enhancing traceability. Read the Dataworkz  [blog](https://www.dataworkz.com/2023/12/21/how-to-evaluate-response-of-a-rag-empowered-llm/) on how Dataworkz evaluates the response of an LLM.
 
 ## API Usage Notes
 In this section, we provide some developer notes on how the sample application was built and what [APIs](https://docs.dataworkz.com/product-docs/api) were used to power various sections. You can try out the API and Question and Answer system integrated into your own application. You can generate an API Key (if already generated, the same key can be used) and connect to this service.
