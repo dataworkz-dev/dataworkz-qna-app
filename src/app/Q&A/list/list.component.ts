@@ -74,8 +74,10 @@ export class ListComponent implements OnInit {
         if(text) {
           text = String(text);
           text = text.replace(/\s/g,'');
-          this.apiService.authToken = 'SSWS ' + text;
+          this.apiService.authToken = 'SSWS' + ' ' + text;
           callMethod(this);
+        } else {
+          this.apiService.error.next('Please provide with a correct token');
         }
       })
     }

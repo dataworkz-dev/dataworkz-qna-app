@@ -80,6 +80,8 @@ export class HistoryQuestionComponent implements OnInit, AfterViewChecked {
           text = text.replace(/\s/g,'');
           this.apiService.authToken = 'SSWS' + text;
           this.getQuestionDetails();
+        } else {
+          this.apiService.error.next('Please provide with a correct token');
         }
       })
     }

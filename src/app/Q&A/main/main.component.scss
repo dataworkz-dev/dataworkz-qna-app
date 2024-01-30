@@ -1,6 +1,6 @@
 .mainDiv {
     height: 100vh;
-    background-color: rgb(246, 247, 252);
+    background-color: #edf1f0;
     overflow: hidden;
 }
 
@@ -76,24 +76,33 @@
 }
 
 .knowledgeSearchInput {
-    width: 95%;
+    width: 715px;
     height: 30px;
-    border: 1px solid #A2A6B3;
-    border-radius: 6px;
+    border: none;
+    border-left: 2px solid #A2A6B3;
     padding-left: 10px;
     font-size: 16px; 
     font-weight: 400; 
     line-height: 22px; 
     letter-spacing: 0px; 
-    transition: 0.5s ease-in;
 }
 
-.knowledgeSearchInput:focus {
-    border: 1px solid #80bdff;
+.addTopBorder {
+    border-top: 1px solid;
 }
 
 .knowledgeSearchInputDiv {
+    width: 950px;
     margin-bottom: 10px;
+    border: 2px solid #A2A6B3;
+    border-radius: 10px;
+}
+
+.knowledgeSearchInputDiv:focus-within {
+    border: 3px solid #80bdff;
+    .knowledgeSearchInput {
+        border-left: 2px solid #80bdff;;
+    }
 }
 
 .searchBtnDiv {
@@ -194,4 +203,25 @@
 .hljsDiv {
     padding: 10px;
     overflow: auto;
+}
+
+.sampleQuestionDiv {
+    cursor: pointer;
+    border: 2px solid #D3D3D3;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    position: fixed; 
+    width: 920px; 
+    height: fit-content; 
+    background-color: white; 
+    padding: 5px;
+}
+
+.sampleQuestion {
+    padding: 5px;
+}
+
+.sampleQuestion:hover {
+    background: aliceblue;
 }

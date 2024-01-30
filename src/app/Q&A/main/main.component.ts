@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -31,6 +31,8 @@ export class MainComponent implements OnInit, AfterViewChecked {
   public responseData = {};
   public questionList: any = [];
   public  historyQuestions: any = {};
+  public sampleQuestions: any = [];
+  public showSampleQuestions: boolean = false;
 
   ngOnInit(): void {
     this.qnaId = this.route.snapshot.paramMap.get('id');
@@ -53,10 +55,28 @@ export class MainComponent implements OnInit, AfterViewChecked {
     }
   }
 
+
+  checkIfQuestionExist() {
+    if(this.question && this.question.length) {
+      this.showSampleQuestions = false;
+    } else {
+      this.showSampleQuestions = true;
+    }
+  }
+
+  closeSampleQuestionDiv() {
+    this.showSampleQuestions = false;
+  }
+
   getQnaDetails(that: any) {
     that.apiService.getQnaDetails(that.qnaId).subscribe((response: any) => {
       that.apiService.loader.next(false);
       that.qnaName = response.name;
+      that.apiService.getSampleQuestions().subscribe((res: any) => {
+        if(res && res[response.name]) {
+          that.sampleQuestions = res[response.name];
+        }
+      })
     })
   }
 
@@ -115,6 +135,9 @@ export class MainComponent implements OnInit, AfterViewChecked {
           that.llmProviders.push({id: llm, name: providers[llm]})
         })
       }
+      if(that.llmProviders && that.llmProviders.length) {
+        that.selectedLlm = that.llmProviders[0].id;
+      }
     })       
   }
 
@@ -144,8 +167,8 @@ export class MainComponent implements OnInit, AfterViewChecked {
         this.formattedResponse = [];
         this.apiService.loader.next(true);
         this.apiService.getAnswer(this.qnaId, this.selectedLlm, this.question).subscribe(async (res: any) => {
-          this,this.apiService.loader.next(false);
-          if(res) {
+          this.apiService.loader.next(false);
+          if(res && res.answer) {
             this.showResponseDiv = true;
             this.responseData = JSON.parse(JSON.stringify(res));
             this.apiService.response = this.responseData;
@@ -231,7 +254,7 @@ export class MainComponent implements OnInit, AfterViewChecked {
   }
 
   reduceDataLength(data: string, length: number) {
-    data = data? data.substring(0,length) + ' ...': '';
+    data = data && data.length > length ? data.substring(0,length) + ' ...': data;
     return data;
   }
 
@@ -258,9 +281,15 @@ export class MainComponent implements OnInit, AfterViewChecked {
           text = text.replace(/\s/g,'');
           this.apiService.authToken = 'SSWS ' + text;
           callMethod(this);
+        } else {
+          this.apiService.error.next('Please provide with a correct token');
         }
       })
     }
+  }
+
+  setQuestion(question: any) {
+    this.question = question;
   }
 
 }

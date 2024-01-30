@@ -6,7 +6,7 @@
 
 3. Run `npm install` to install dependencies.
 
-4. You will need a Dataworkz API Key to access the Dataworkz RAG QnA Service. Here are the steps to [generate an API Key](generate-api-key).
+4. You will need a Dataworkz API Key to access the Dataworkz RAG QnA Service. Here are the steps to [generate an API Key](https://docs.dataworkz.com/product-docs/api-key-generation/generate-api-key-in-dataworkz).
 
 5. Place your generated API Key in `token.txt` file. 
 You can find the file at `src/assets/token.txt`.

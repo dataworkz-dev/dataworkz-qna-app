@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, catchError, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,32 @@ export class ApiService {
   public error = new BehaviorSubject('');
   public loader = new BehaviorSubject(false);
   public authToken = '';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
   getToken() {
     let url = 'assets/token.txt';
     return this.http.get(url, { responseType: 'text'}).pipe(
       catchError(err => {
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+        } else {
+          this.error.next('something unexpected happened');
+        }
         this.loader.next(false);
-        this.error.next('something unexpected happened');
+        return of([]);
+      }));
+  }
+
+  getSampleQuestions() {
+    return this.http.get('assets/examples.json', { responseType: 'json'}).pipe(
+      catchError(err => {
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+        } else {
+          this.error.next('something unexpected happened');
+        }
+        this.loader.next(false);
         return of([]);
       }));
   }
@@ -47,7 +66,12 @@ export class ApiService {
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems', {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
-        this.error.next('something unexpected happened');
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+          this.router.navigate(['list']);
+        } else {
+          this.error.next('something unexpected happened');
+        }
         console.log('Handling error locally and rethrowing it...', err);
         return of([]);
       }));
@@ -61,7 +85,12 @@ export class ApiService {
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id +'/llm-providers', {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
-        this.error.next('something unexpected happened');
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+          this.router.navigate(['list'])
+        } else {
+          this.error.next('something unexpected happened');
+        }
         console.log('Handling error locally and rethrowing it...', err);
         return of([]);
       }));
@@ -75,7 +104,12 @@ export class ApiService {
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id, {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
-        this.error.next('something unexpected happened');
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+          this.router.navigate(['list'])
+        } else {
+          this.error.next('something unexpected happened');
+        }
         console.log('Handling error locally and rethrowing it...', err);
         return of([]);
       }));
@@ -92,7 +126,12 @@ export class ApiService {
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id + '/questionshistory', {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
-        this.error.next('something unexpected happened');
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+          this.router.navigate(['list'])
+        } else {
+          this.error.next('something unexpected happened');
+        }
         console.log('Handling error locally and rethrowing it...', err);
         return of([]);
       }));
@@ -110,7 +149,12 @@ export class ApiService {
     return this.http.get(url, {headers: headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
-        this.error.next('something unexpected happened');
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+          this.router.navigate(['list'])
+        } else {
+          this.error.next('something unexpected happened');
+        }
         console.log('Handling error locally and rethrowing it...', err);
         return of([]);
       }));
@@ -126,7 +170,12 @@ export class ApiService {
     return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id + '/questions/' + questionId, {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
-        this.error.next('something unexpected happened');
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+          this.router.navigate(['list'])
+        } else {
+          this.error.next('something unexpected happened');
+        }
         console.log('Handling error locally and rethrowing it...', err);
         return of([]);
       }));

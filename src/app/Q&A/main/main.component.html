@@ -29,27 +29,42 @@
             <div class="llmSelectDiv">
                 <span class="qaSystemText">Q&A System: </span>
                 <span class="qaName">{{qnaName}}</span>
-                <span class="llmProviderText">LLM Provider:</span>
-                <span>
-                    <select class="qaName" style="border: 1px solid #F2D9FF;
-                    border-radius: 5px;
-                    height: 25px;
-                    background: white;
-                    margin-left: 5px;" [(ngModel)]="selectedLlm">
-                        <option value="llm">Select LLM</option>
-                        <option *ngFor="let llm of llmProviders" [value]="llm.id">{{llm.name}}</option>
-                    </select>
-                </span>
             </div>
             <div class="knowledgeSearchText">
                 <span><img class="filterImg" src="./../../../assets/executedFilter.svg" alt="filter image"></span>
                 <span>Knowledge Search</span>
             </div>
-            <div class="knowledgeSearchInputDiv">
-                <input type="text" class="knowledgeSearchInput" [(ngModel)]="question" (keyup.enter)="askQuestion()">
-            </div>
-            <div class="searchBtnDiv">
-                <button type="submit" class="searchBtn" (click)="askQuestion()">Search</button>
+            <div (click)="checkIfQuestionExist()" class="searchQuestionWrapperDiv">
+                <div class="knowledgeSearchInputDiv">
+                    <span>
+                        <select class="qaName" style="
+                        border: none;
+                        height: 25px;
+                        width: 180px;
+                        background: white;
+                        margin-left: 5px;" [(ngModel)]="selectedLlm">
+                            <option value="llm">Select LLM</option>
+                            <option *ngFor="let llm of llmProviders" [value]="llm.id">{{llm.name}}</option>
+                        </select>
+                    </span>
+                    <span>
+                        <input type="text" class="knowledgeSearchInput" id="knowledgeInput" (click)="checkIfQuestionExist()" [(ngModel)]="question" (blur)="closeSampleQuestionDiv()" (keyup.enter)="askQuestion()" (keyup)="checkIfQuestionExist()" autocomplete="off">
+                    </span>
+                    <span (click)="askQuestion()" style="float: right;
+                    margin-top: 5px; margin-right: 5px;">
+                        <!-- <button type="submit" style="float: right" > -->
+                            <img src='./../../../assets/send.svg' alt="send" /> 
+                        <!-- </button> -->
+                    </span>
+                </div>
+                <div *ngIf="true && showSampleQuestions && sampleQuestions && sampleQuestions.length" id="sampleQuestions" class="sampleQuestionDiv">
+                    <div style="margin-bottom: 10px; padding: 5px; font-size: 15px; font-weight: 700; border-bottom: 1px solid #D3D3D3;">
+                        Suggested Questions:
+                    </div>
+                    <div *ngFor="let question of sampleQuestions; let i = index" (mousedown)="setQuestion(question)" class="sampleQuestion">
+                        {{question}}
+                    </div>
+                </div>
             </div>
         </div>
         <div *ngIf="showResponseDiv">
@@ -77,4 +92,15 @@
     </div>
 </div>
 
-
+<!-- <div style="
+    width: 400px;
+    position: fixed;
+    top: 10px;
+    right: calc(50vw - 200px);
+    border: 2px solid red;
+    padding: 10px;
+    height: fit-content;
+    background: #ffccbb;
+    border-radius: 5px;">
+        question list
+    </div> -->
