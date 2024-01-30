@@ -38,17 +38,19 @@
                 <div class="knowledgeSearchInputDiv">
                     <span>
                         <select class="qaName" style="
-                        border: none;
+                        border: 1px solid #FF6666;
+			border-radius: 7px;
+			background-color: #FF6666;
+			color: white;
                         height: 25px;
                         width: 180px;
-                        background: white;
                         margin-left: 5px;" [(ngModel)]="selectedLlm">
                             <option value="llm">Select LLM</option>
                             <option *ngFor="let llm of llmProviders" [value]="llm.id">{{llm.name}}</option>
                         </select>
                     </span>
                     <span>
-                        <input type="text" class="knowledgeSearchInput" id="knowledgeInput" (click)="checkIfQuestionExist()" [(ngModel)]="question" (blur)="closeSampleQuestionDiv()" (keyup.enter)="askQuestion()" (keyup)="checkIfQuestionExist()" autocomplete="off">
+                        <input type="text" class="knowledgeSearchInput" id="knowledgeInput" (click)="checkIfQuestionExist()" [(ngModel)]="question" (blur)="closeSampleQuestionDiv()" (keyup.enter)="askQuestion()" (keyup)="checkIfQuestionExist()" autocomplete="off" placeholder="Ask your question here">
                     </span>
                     <span (click)="askQuestion()" style="float: right;
                     margin-top: 5px; margin-right: 5px;">
@@ -58,7 +60,7 @@
                     </span>
                 </div>
                 <div *ngIf="true && showSampleQuestions && sampleQuestions && sampleQuestions.length" id="sampleQuestions" class="sampleQuestionDiv">
-                    <div style="margin-bottom: 10px; padding: 5px; font-size: 15px; font-weight: 700; border-bottom: 1px solid #D3D3D3;">
+                    <div style="margin-bottom: 10px; padding: 5px; font-size: 15px; font-weight: 200; border-bottom: 1px solid #D3D3D3; text-transform: uppercase;">
                         Suggested Questions:
                     </div>
                     <div *ngFor="let question of sampleQuestions; let i = index" (mousedown)="setQuestion(question)" class="sampleQuestion">
