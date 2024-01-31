@@ -57,7 +57,7 @@ The selected QnA systemId will be needed in subsequent APIs.
 Information on each individual QnA system is retrieved using this API - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid). This is used in the example QnA application to populate the individual QnA system cards.
 
 ### Large Language Model (LLM) Providers
-Questions are answered by LLMs configured in the Dataworkz RAG Builder. LLMs configured for sample systems are OpenAI GPT 3.5, a privately hosted Llama-2 model, and Google's Gemini Pro (this list could change in the future). This API provides a list of configured LLMProviders by QnA system - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/llm-providers](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-llm-providers)
+Questions are answered by LLMs configured in the Dataworkz RAG Builder. LLMs configured for systems can be from OpenAI, privately hosted models (like Llama-2), and Google's Vertex AI (The sample app can support one or more of these). This API provides a list of configured LLMProviders by QnA system - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/llm-providers](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-llm-providers)
 
 The example QnA application uses this to populate the LLMProviders drop down to allow the user to select the LLM they want to use to answer the question.
 You should store the id of the LLMProvider you wish to use to ask questions to. Questions can be asked to specific LLM providers identified by the `llmProviderId` returned by this API call.
