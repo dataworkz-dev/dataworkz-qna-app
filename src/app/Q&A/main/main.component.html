@@ -1,7 +1,7 @@
-<div *ngIf="showLoader" style="height: 100vh;">
+<!-- <div *ngIf="showLoader" style="height: 100vh;">
     <div class="loader"></div>
-</div>
-<div *ngIf="!showLoader" class="mainDiv">
+</div> -->
+<div class="mainDiv">
     <div [ngClass]="drawerOpened ? 'show' : 'hide'" class="leftDrawer">
         <div style="text-align: center;
         margin-top: 35vh;" *ngIf="!questionList || questionList.length == 0">User has not asked any questions.</div>
@@ -74,8 +74,10 @@
                 <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">
                     AI Response
                 </div>
+                <div *ngIf="showLoader">
+                    <div style="margin-top: 200px;" class="loader"></div>
+                </div>
                 <div *ngFor="let res of formattedResponse; let i = index" style="white-space: pre-wrap; font-size: 15px;">
-                    <!-- {{this.response}} -->
                     <div class="hljsDiv" style="overflow: auto;" *ngIf="i % 2 == 1">
                         <textarea highlight-js options="{}">{{res}}</textarea>
                     </div>
@@ -84,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sourceListDiv" style="margin-left: 15px; margin-top: 30px;">Source
+            <div *ngIf="!showLoader" class="sourceListDiv" style="margin-left: 15px; margin-top: 30px;">Source
             <div *ngFor="let source of sourceData" class="sourceWrapperDiv">
                 <a style="font-size: 12px; font-weight: 400; text-decoration: none; color: #0966CE;" [href]="source.link" [title]="source.link" target="_blank">{{reduceDataLength(source.link, 25)}}</a>
                 <div class="sourceSampleText" (click)="openSource(source)" style="white-space: pre-wrap; margin-top: 10px; font-size: 12px; font-weight: 400; cursor: pointer;">{{reduceDataLength(source.data, 50)}}</div>

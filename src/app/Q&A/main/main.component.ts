@@ -36,7 +36,6 @@ export class MainComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.qnaId = this.route.snapshot.paramMap.get('id');
-    this.apiService.loader.next(true);
     this.checkIfTokenExists(this.getQnaDetails);
     this.checkIfTokenExists(this.getLlmProviders);
     this.checkIfTokenExists(this.getQuestionHistory);
@@ -70,7 +69,6 @@ export class MainComponent implements OnInit, AfterViewChecked {
 
   getQnaDetails(that: any) {
     that.apiService.getQnaDetails(that.qnaId).subscribe((response: any) => {
-      that.apiService.loader.next(false);
       that.qnaName = response.name;
       that.apiService.getSampleQuestions().subscribe((res: any) => {
         if(res && res[response.name]) {
@@ -159,15 +157,15 @@ export class MainComponent implements OnInit, AfterViewChecked {
 
   async getResponse(fromMain: boolean = false) {
     if(this.question && this.question.length) {
-      this.showResponseDiv = false;
+      this.showResponseDiv = true;
       this.formattedResponse = [];
       if(fromMain) {
         this.response = '';
         this.sourceData = [];
         this.formattedResponse = [];
-        this.apiService.loader.next(true);
+        this.showLoader = true;
         this.apiService.getAnswer(this.qnaId, this.selectedLlm, this.question).subscribe(async (res: any) => {
-          this.apiService.loader.next(false);
+          this.showLoader = false;
           if(res && res.answer) {
             this.showResponseDiv = true;
             this.responseData = JSON.parse(JSON.stringify(res));
@@ -192,6 +190,8 @@ export class MainComponent implements OnInit, AfterViewChecked {
                 }
               }
             }
+          } else {
+            this.showResponseDiv = false;
           }
         })
       } 
