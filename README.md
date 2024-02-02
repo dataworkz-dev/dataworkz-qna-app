@@ -40,7 +40,10 @@ The emergence of hallucinations presents a notable obstacle in the widespread ad
 ## API Usage Notes
 In this section, we provide some developer notes on how the sample application was built and what [APIs](https://docs.dataworkz.com/product-docs/api) were used to power various sections. You can try out the API and Question and Answer system integrated into your own application. You can generate an API Key (if already generated, the same key can be used) and connect to this service.
 
-The example QnA application connects to `https://mongodb.dataworkz.com` as the backend RAG service. Dataworkz has provided a number of sample datasets (called QnA systems) to try using the RAG QnA API against. The example QnA application lists out all the datasets and lets the user ask questions against them. These example QnA systems have been configured with MongoDB as a vector database and demonstrate Dataworkz RAG capabilities with MongoDB and integrate a variety of popular Large Language Models (OpenAi GPT, Google Gemini, Llama-2).
+### Partner Playground
+Dataworkz is working with strategic partners to demonstrate how our technology is integrating together. This example QnA application connects to [https://mongodb.dataworkz.com](https://mongodb.dataworkz.com) as the backend RAG Partner Playground service. This Partner Playground service demonstrates how [Dataworkz](https://www.dataworkz.com) and [MongoDB Atlas Vector Search](https://www.mongodb.com/products/platform/atlas-vector-search) work together to create a QnA system for publicly available MongoDB documentation. Learn more on how this system was built in [this video](https://youtu.be/yMRHz0cDW_0).
+
+The sample QnA system demonstrates how to use Dataworkz RAG Builder API to list QnA Systems and make rich queries against this dataset.
 
 ### Authentication
 Please refer to the [API Key Generation](https://docs.dataworkz.com/product-docs/api-key-generation/generate-api-key-in-dataworkz) section on how to get an API Key and how to use it to invoke Dataworkz QnA APIs. In the example QnA application, the API token is passed in the `Authentication` header using the form `SWSS <api-key>`.
