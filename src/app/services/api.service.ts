@@ -13,6 +13,7 @@ export class ApiService {
   public error = new BehaviorSubject('');
   public loader = new BehaviorSubject(false);
   public authToken = '';
+  public environmentUrl = 'http://genai.dataworkz.com/api/qna/v1/systems';
   constructor(private http: HttpClient,
               private router: Router) { }
 
@@ -63,7 +64,7 @@ export class ApiService {
       'Accept': 'application/json',
       'Authorization': this.authToken
     });
-    return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems', {headers : headersSet}).pipe(
+    return this.http.get(this.environmentUrl, {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
         if(err && err.status && err.status == 401) {
@@ -82,7 +83,7 @@ export class ApiService {
       'Accept': 'application/json',
       'Authorization': this.authToken
     });
-    return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id +'/llm-providers', {headers : headersSet}).pipe(
+    return this.http.get(this.environmentUrl + '/' + id +'/llm-providers', {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
         if(err && err.status && err.status == 401) {
@@ -101,7 +102,7 @@ export class ApiService {
       'Accept': 'application/json',
       'Authorization': this.authToken
     });
-    return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id, {headers : headersSet}).pipe(
+    return this.http.get(this.environmentUrl + '/' + id, {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
         if(err && err.status && err.status == 401) {
@@ -123,7 +124,7 @@ export class ApiService {
       'Accept': 'application/json',
       'Authorization': this.authToken
     });
-    return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id + '/questionshistory', {headers : headersSet}).pipe(
+    return this.http.get(this.environmentUrl + '/' + id + '/questionshistory', {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
         if(err && err.status && err.status == 401) {
@@ -140,7 +141,7 @@ export class ApiService {
   getAnswer(id: string, llmId: string, question: string) {
     // https://mongodb.dataworkz.com/api/qna/v1/systems/bab0f014-b410-4ffb-897e-b87668306383/answer?questionText=How%20to%20create%20text%20index%20in%20version%206.0%3F&llmProviderId=0c21fa31-0469-48ba-9a71-3d87f4160d42;
 
-    let url = 'https://mongodb.dataworkz.com/api/qna/v1/systems/' + id + '/answer?questionText=' + encodeURI(question) + '&llmProviderId=' + llmId;
+    let url = this.environmentUrl + '/' + id + '/answer?questionText=' + encodeURI(question) + '&llmProviderId=' + llmId;
 
     const headersSet = new HttpHeaders({
       'Accept': 'application/json',
@@ -167,7 +168,7 @@ export class ApiService {
       'Accept': 'application/json',
       'Authorization': this.authToken
     });
-    return this.http.get('https://mongodb.dataworkz.com/api/qna/v1/systems/' + id + '/questions/' + questionId, {headers : headersSet}).pipe(
+    return this.http.get(this.environmentUrl + '/' + id + '/questions/' + questionId, {headers : headersSet}).pipe(
       catchError(err => {
         this.loader.next(false);
         if(err && err.status && err.status == 401) {
