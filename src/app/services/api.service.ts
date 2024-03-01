@@ -13,7 +13,7 @@ export class ApiService {
   public error = new BehaviorSubject('');
   public loader = new BehaviorSubject(false);
   public authToken = '';
-  public environmentUrl = 'http://genai.dataworkz.com/api/qna/v1/systems';
+  public environmentUrl = 'http://mongodb.dataworkz.com/api/qna/v1/systems';
   constructor(private http: HttpClient,
               private router: Router) { }
 
