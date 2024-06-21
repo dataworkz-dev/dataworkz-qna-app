@@ -8,13 +8,7 @@ Jump here to learn more about [Dataworkz RAG Builder](#what-is-dataworkz)
 
 3. Run `npm install` to install dependencies.
 
-4. You will need a Dataworkz API Key to access the Dataworkz RAG QnA Service. Here are the steps to [generate an API Key](https://docs.dataworkz.com/product-docs/api-key-generation/generate-api-key-in-dataworkz).
-   Note: *The API key name has to be unique across all users so please choose a name accordingly.*
-
-6. Place your generated API Key in `token.txt` file. 
-You can find the file at `src/assets/token.txt`.
-
-7. Run `npm run start` to run a local web server that hosts the sample QnA application. To access the application, open a browser and navigate to `http://localhost:4200`
+4. Run `npm run start` to run a local web server that hosts the sample QnA application. To access the application, open a browser and navigate to `http://localhost:4200`
    
 Please report any issues with the sample QnA application in [Issues](https://github.com/dataworkz-dev/dataworkz-qna-app/issues) 
 
@@ -41,7 +35,7 @@ The emergence of hallucinations presents a notable obstacle in the widespread ad
 In this section, we provide some developer notes on how the sample application was built and what [APIs](https://docs.dataworkz.com/product-docs/api) were used to power various sections. You can try out the API and Question and Answer system integrated into your own application. You can generate an API Key (if already generated, the same key can be used) and connect to this service.
 
 ### Partner Playground
-Dataworkz is working with strategic partners to demonstrate how our technology is integrating together. This example QnA application connects to [https://mongodb.dataworkz.com](https://mongodb.dataworkz.com) as the backend RAG Partner Playground service. This Partner Playground service demonstrates how [Dataworkz](https://www.dataworkz.com) and [MongoDB Atlas Vector Search](https://www.mongodb.com/products/platform/atlas-vector-search) work together to create a QnA system for publicly available MongoDB documentation. Learn more on how this system was built in [this video](https://youtu.be/yMRHz0cDW_0).
+Dataworkz is working with strategic partners to demonstrate how our technology is integrating together. This example QnA application connects to [https://ragapps.dataworkz.com](https://ragapps.dataworkz.com) as the backend RAG Partner Playground service. This Partner Playground service demonstrates how [Dataworkz](https://www.dataworkz.com) and [MongoDB Atlas Vector Search](https://www.mongodb.com/products/platform/atlas-vector-search) work together to create a QnA system for publicly available documents like 10k filings of listed companies like Uber. Learn more on how this system was built in [this video](https://youtu.be/yMRHz0cDW_0).
 
 The sample QnA system demonstrates how to use Dataworkz RAG Builder API to list QnA Systems and make rich queries against this dataset.
 
@@ -53,28 +47,28 @@ Dataworkz RAG Builder supports configuring multiple, isolated QnA systems. QnA s
 
 The QnA example application  starts out with listing all the QnA systems (as cards) for the user to select the one she is interested in. Application developers can choose to list the systems for user selection or if the choice is clear from the context then set it up in code. 
 
-Here's the API to list all available QnA systems - [https://mongodb.dataworkz.com/api/qna/v1/systems](https://docs.dataworkz.com/product-docs/api#qna-v1-systems).
+Here's the API to list all available QnA systems - [https://ragapps.dataworkz.com/api/qna/v1/systems](https://docs.dataworkz.com/product-docs/api#qna-v1-systems).
 The selected QnA systemId will be needed in subsequent APIs.
 
 #### QnA system details
-Information on each individual QnA system is retrieved using this API - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid). This is used in the example QnA application to populate the individual QnA system cards.
+Information on each individual QnA system is retrieved using this API - [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid). This is used in the example QnA application to populate the individual QnA system cards.
 
 ### Large Language Model (LLM) Providers
-Questions are answered by LLMs configured in the Dataworkz RAG Builder. LLMs configured for systems can be from OpenAI, privately hosted models (like Llama-2), and Google's Vertex AI (The sample app can support one or more of these). This API provides a list of configured LLMProviders by QnA system - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/llm-providers](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-llm-providers)
+Questions are answered by LLMs configured in the Dataworkz RAG Builder. LLMs configured for systems can be from OpenAI, privately hosted models (like Llama-2), and Google's Vertex AI (The sample app can support one or more of these). This API provides a list of configured LLMProviders by QnA system - [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId}/llm-providers](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-llm-providers)
 
 The example QnA application uses this to populate the LLMProviders drop down to allow the user to select the LLM they want to use to answer the question.
 You should store the id of the LLMProvider you wish to use to ask questions to. Questions can be asked to specific LLM providers identified by the `llmProviderId` returned by this API call.
 
 ### Asking a question
-The API to ask a question to the Dataworkz QnA system is [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/answer](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-answer)
+The API to ask a question to the Dataworkz QnA system is [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId}/answer](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-answer)
 
 This API needs the `systemId` of the QnA system you are targetting and the `llmProviderId` of the LLM to use. The example QnA application leverages this API to power the "Knowledge Search" page. The response of this API includes the response from the LLM as well as links to the authoritative sources that back up the answer.
 
 ### Question History
-The example QnA application provides a list of previously asked questions from a QnA system. This is a convenience method for users to look at previously answered questions. The following API is used - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId)/questionshistory](https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/questionshistory)
+The example QnA application provides a list of previously asked questions from a QnA system. This is a convenience method for users to look at previously answered questions. The following API is used - [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId)/questionshistory](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-history)
 
 #### Previously Answered Questions
-Dataworkz provides a list of previously answered questions along with additional scores and analysis on the quality of the answer. Read more about this here. The example QnA application uses this API to provide details on each answered question - [https://mongodb.dataworkz.com/api/qna/v1/systems/{systemId}/questions/{questionId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-questions-questionid)
+Dataworkz provides a list of previously answered questions along with additional scores and analysis on the quality of the answer. Read more about this here. The example QnA application uses this API to provide details on each answered question - [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId}/questions/{questionId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-questions-questionid)
 
 
 
