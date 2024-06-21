@@ -13,7 +13,7 @@ export class ApiService {
   public error = new BehaviorSubject('');
   public loader = new BehaviorSubject(false);
   public authToken = '';
-  public environmentUrl = 'https://mongodb.dataworkz.com/api/qna/v1/systems';
+  public environmentUrl = 'https://ragapps.dataworkz.com/api/qna/v1/systems';
   constructor(private http: HttpClient,
               private router: Router) { }
 
