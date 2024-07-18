@@ -5,10 +5,18 @@ Jump here to learn more about [Dataworkz RAG Builder](#what-is-dataworkz)
 1. Clone Repository dataworkz-qna-app using `git clone https://github.com/dataworkz-dev/dataworkz-qna-app.git` .
 
 2. If required, install node.js for your platform (Node Version > 16.0.0).
+   
+3. A default API key for the sample is included in this project. **You can ignore step # 4 and # 5 unless you plan to create your own account for further development.**
+   
+4. You will need a Dataworkz API Key to access the Dataworkz RAG QnA Service.  Here are the steps to [generate an API Key](https://docs.dataworkz.com/product-docs/api-key-generation/generate-api-key-in-dataworkz).
+   Note: *The API key name has to be unique across all users so please choose a name accordingly.*
 
-3. Run `npm install` to install dependencies.
+5. Place your generated API Key in `token.txt` file. 
+You can find the file at `src/assets/token.txt`.
 
-4. Run `npm run start` to run a local web server that hosts the sample QnA application. To access the application, open a browser and navigate to `http://localhost:4200`
+6. Run `npm install` to install dependencies.
+
+7. Run `npm run start` to run a local web server that hosts the sample QnA application. To access the application, open a browser and navigate to `http://localhost:4200`
    
 Please report any issues with the sample QnA application in [Issues](https://github.com/dataworkz-dev/dataworkz-qna-app/issues) 
 
@@ -35,7 +43,7 @@ The emergence of hallucinations presents a notable obstacle in the widespread ad
 In this section, we provide some developer notes on how the sample application was built and what [APIs](https://docs.dataworkz.com/product-docs/api) were used to power various sections. You can try out the API and Question and Answer system integrated into your own application. You can generate an API Key (if already generated, the same key can be used) and connect to this service.
 
 ### Partner Playground
-Dataworkz is working with strategic partners to demonstrate how our technology is integrating together. This example QnA application connects to [https://ragapps.dataworkz.com](https://ragapps.dataworkz.com) as the backend RAG Partner Playground service. This Partner Playground service demonstrates how [Dataworkz](https://www.dataworkz.com) and [MongoDB Atlas Vector Search](https://www.mongodb.com/products/platform/atlas-vector-search) work together to create a QnA system for publicly available documents like 10k filings of listed companies like Uber. Learn more on how this system was built in [this video](https://youtu.be/yMRHz0cDW_0).
+Dataworkz is working with strategic partners to demonstrate how our technology is integrating together. This example QnA application connects to [https://ragapps.dataworkz.com](https://ragapps.dataworkz.com) as the backend RAG Partner Playground service. This Partner Playground service demonstrates how [Dataworkz](https://www.dataworkz.com) and [MongoDB Atlas Vector Search](https://www.mongodb.com/products/platform/atlas-vector-search) work together to create a QnA system for publicly available documents like 10k filings of listed companies like Uber. 
 
 The sample QnA system demonstrates how to use Dataworkz RAG Builder API to list QnA Systems and make rich queries against this dataset.
 
