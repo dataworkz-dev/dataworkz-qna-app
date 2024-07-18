@@ -140,7 +140,7 @@
     width: 70%;
     margin-left: 20px;
     margin-top: 25px;
-    padding: 15px;
+    padding: 20px;
     float: left;
     line-height: 1.5;
 }
@@ -232,4 +232,22 @@
 
 .sampleQuestion:hover {
     background: aliceblue;
+}
+
+.selectedSearchType {
+    border-bottom: 1px solid blue;
+    color: blue;
+}
+
+.notSelecetSearchType {
+    border-bottom: none;
+    color: black;
+}
+
+.removeMarginLeft {
+    margin-left: 0;
+}
+
+.addMarginLeft {
+    margin-left: 20px;
 }

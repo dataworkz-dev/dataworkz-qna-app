@@ -33,6 +33,13 @@ export class MainComponent implements OnInit, AfterViewChecked {
   public  historyQuestions: any = {};
   public sampleQuestions: any = [];
   public showSampleQuestions: boolean = false;
+  public searchType: string = 'knowledgeSearch';
+  public sementicQuestion: string = '';
+  public showSementicResponse: boolean = false;
+  public sementicResult: any = {searchResultsList: []};
+  public filters: any = {};
+  public sementicResultCopy: any = {searchResultsList: []};
+  public filterKeys: any = [];
 
   ngOnInit(): void {
     this.qnaId = this.route.snapshot.paramMap.get('id');
@@ -290,6 +297,89 @@ export class MainComponent implements OnInit, AfterViewChecked {
 
   setQuestion(question: any) {
     this.question = question;
+  }
+
+  setSearchType(type: string) {
+    if(this.searchType != type) {
+      this.showSementicResponse = false;
+      this.showResponseDiv = false;
+      this.question = '';
+      this.sementicQuestion = '';
+      this.searchType = type;
+    }
+  }
+
+  askSementicQuestion() {
+    this.sementicResult.searchResultsList = [];
+    this.sementicResultCopy.searchResultsList = [];
+    this.showSementicResponse = true;
+    this.filters = {};
+    this.filterKeys = [];
+    this.showLoader = true;
+    this.apiService.getSementicSearchAnswer(this.qnaId, this.sementicQuestion).subscribe((res: any) => {
+      this.showLoader = false;
+      if(res && res.searchResultsList && res.searchResultsList.length) {
+        res.searchResultsList.forEach((searchResult: any) => {
+          let searchResultObj = JSON.parse(JSON.stringify(searchResult));
+          if(searchResult.metadata) {
+            let metaDataObj = JSON.parse(JSON.stringify(searchResult.metadata));
+            let keys = Object.entries(metaDataObj);
+            searchResultObj.metadata = keys;
+            if(keys && keys.length) {
+              keys.forEach((key, i) => {
+                if(!this.filters[key[0]]) {
+                  this.filters[key[0]] = []
+                }
+                this.filters[key[0]].push(key[1]);
+                this.filters[key[0]] = this.filters[key[0]].filter((value: any, index:any, self:any) => {
+                  return self.indexOf(value) === index;
+                });
+                console.log(key[0], key[1])
+                this.filterKeys = Object.keys(this.filters);
+              } )
+            }
+          } else {
+            searchResultObj.metadata = [];
+          }
+          this.sementicResult.searchResultsList.push(searchResultObj)
+          this.sementicResultCopy.searchResultsList.push(searchResultObj)
+        })
+      }
+    });
+  }
+
+  resetFilters(){
+    this.sementicResult.searchResultsList = JSON.parse(JSON.stringify(this.sementicResultCopy.searchResultsList))
+    if(this.filterKeys && this.filterKeys.length) {
+      this.filterKeys.forEach((key: any) => {
+        let element: any = document.getElementById(key);
+        element.value = "";
+      })
+    }
+  }
+
+  submitFilters() {
+    var filteredData: any = [];
+    var dataTobeFilterd: any = JSON.parse(JSON.stringify(this.sementicResultCopy.searchResultsList))
+    if(this.filterKeys && this.filterKeys.length) {
+      this.filterKeys.forEach((key: any) => {
+        let element: any = document.getElementById(key);
+        if(element && element.value && dataTobeFilterd.length) {
+          dataTobeFilterd.forEach((listItem: any)=> {
+            if(listItem.metadata && listItem.metadata.length) {
+              listItem.metadata.forEach((data:any) => {
+                if(data && data.length && data[1] && (element.value == "" || data[1] == element.value)) {
+                  filteredData.push(listItem);
+                }
+              })
+            }
+          })
+        }
+        dataTobeFilterd = JSON.parse(JSON.stringify(filteredData))
+        filteredData = []
+      })
+      this.sementicResult.searchResultsList = JSON.parse(JSON.stringify(dataTobeFilterd))
+    }
   }
 
 }

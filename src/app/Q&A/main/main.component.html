@@ -2,7 +2,7 @@
     <div class="loader"></div>
 </div> -->
 <div class="mainDiv">
-    <div [ngClass]="drawerOpened ? 'show' : 'hide'" class="leftDrawer">
+    <div *ngIf="searchType == 'knowledgeSearch'" [ngClass]="drawerOpened ? 'show' : 'hide'" class="leftDrawer">
         <div style="text-align: center;
         margin-top: 35vh;" *ngIf="!questionList || questionList.length == 0">User has not asked any questions.</div>
         <div *ngFor="let question of questionList">
@@ -16,9 +16,9 @@
     <div class="qaDiv">
         <div style="height: 35px;
         padding-top: 15px;">
-            <span><img class="collapseImg" [src]="collapseImageSrc" (click)="openOrCloseDrawer()" (mouseover)="changeImgIcon()" (mouseout)="resetImgIcon()"/></span>
-            <span style="font-size: 16px;
-            font-weight: 700;line-height: 25px;"> KNOWLEDGE BASE</span>
+            <span *ngIf="searchType == 'knowledgeSearch'"><img class="collapseImg" [src]="collapseImageSrc" (click)="openOrCloseDrawer()" (mouseover)="changeImgIcon()" (mouseout)="resetImgIcon()"/></span>
+            <span [ngClass]="[searchType == 'knowledgeSearch' ? 'selectedSearchType' : 'notSelecetSearchType', searchType == 'knowledgeSearch' ? 'removeMarginLeft' : 'addMarginLeft']" style="cursor: pointer; margin-right: 20px;" (click)="setSearchType('knowledgeSearch')">Q&A Search</span>
+            <span [ngClass]="searchType == 'sementicSearch' ? 'selectedSearchType' : 'notSelecetSearchType'" style="cursor: pointer;" (click)="setSearchType('sementicSearch')">Enterprise Search</span>
             <span style="position: fixed;
             right: 0; cursor: pointer;" (click)="backToListPage()">
                 <img width="40" height="40" src="./../../../assets/plus.svg" alt="cancel" />
@@ -30,11 +30,12 @@
                 <span class="qaSystemText">Q&A System: </span>
                 <span class="qaName">{{qnaName}}</span>
             </div>
-            <div class="knowledgeSearchText">
+            <!-- <div class="knowledgeSearchText">
                 <span><img class="filterImg" src="./../../../assets/executedFilter.svg" alt="filter image"></span>
-                <span>Knowledge Search</span>
-            </div>
-            <div (click)="checkIfQuestionExist()" class="searchQuestionWrapperDiv">
+                <span [ngClass]="searchType == 'knowledgeSearch' ? 'selectedSearchType' : 'notSelecetSearchType'" style="cursor: pointer; margin-right: 20px;" (click)="setSearchType('knowledgeSearch')">Knowledge Search</span>
+                <span [ngClass]="searchType == 'sementicSearch' ? 'selectedSearchType' : 'notSelecetSearchType'" style="cursor: pointer;" (click)="setSearchType('sementicSearch')">Sementic Search</span>
+            </div> -->
+            <div (click)="checkIfQuestionExist()" class="searchQuestionWrapperDiv" *ngIf="searchType == 'knowledgeSearch'">
                 <div class="knowledgeSearchInputDiv">
                     <span>
                         <select class="qaName" style="
@@ -68,6 +69,19 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="searchType == 'sementicSearch'">
+                <div class="knowledgeSearchInputDiv">
+                    <span>
+                        <input type="text" class="knowledgeSearchInput" id="sementicInput" style="border: none; margin-left: 10px; width: 890px;" [(ngModel)]="sementicQuestion" (keyup.enter)="askSementicQuestion()" autocomplete="off" placeholder="Ask your question here">
+                    </span>
+                    <span (click)="askSementicQuestion()" style="float: right;
+                    margin-top: 5px; margin-right: 5px;">
+                        <!-- <button type="submit" style="float: right" > -->
+                            <img src='./../../../assets/send.svg' alt="send" /> 
+                        <!-- </button> -->
+                    </span>
+                </div>
+            </div>
         </div>
         <div *ngIf="showResponseDiv">
             <div #scrollMe class="responseWrapperDiv">
@@ -87,11 +101,72 @@
                 </div>
             </div>
             <div *ngIf="!showLoader" class="sourceListDiv" style="margin-left: 15px; margin-top: 30px;">Source
-            <div *ngFor="let source of sourceData" class="sourceWrapperDiv">
-                <a style="font-size: 12px; font-weight: 400; text-decoration: none; color: #0966CE;" [href]="source.link" [title]="source.link" target="_blank">{{reduceDataLength(source.link, 25)}}</a>
-                <div class="sourceSampleText" (click)="openSource(source)" style="white-space: pre-wrap; margin-top: 10px; font-size: 12px; font-weight: 400; cursor: pointer;">{{reduceDataLength(source.data, 50)}}</div>
+                <div *ngFor="let source of sourceData" class="sourceWrapperDiv">
+                    <a style="font-size: 12px; font-weight: 400; text-decoration: none; color: #0966CE;" [href]="source.link" [title]="source.link" target="_blank">{{reduceDataLength(source.link, 25)}}</a>
+                    <div class="sourceSampleText" (click)="openSource(source)" style="white-space: pre-wrap; margin-top: 10px; font-size: 12px; font-weight: 400; cursor: pointer;">{{reduceDataLength(source.data, 50)}}</div>
+                </div>
             </div>
         </div>
+        <div *ngIf="showSementicResponse">
+            <div class="responseWrapperDiv">
+                <div *ngIf="showLoader">
+                    <div style="margin-top: 200px;" class="loader"></div>
+                </div>
+                <div *ngIf="!showLoader && !sementicResult.searchResultsList.length">
+                    No data available.
+                </div>
+                <div *ngIf="!showLoader && sementicResult.searchResultsList.length">
+                    <div style="font-size: 14px;" *ngFor="let sementicRes of sementicResult.searchResultsList">
+                        <div style="margin-bottom: 15px;"><a style="font-size: 12px; font-weight: 400; text-decoration: none; color: #0966CE;" [href]="sementicRes.link" [title]="sementicRes.link" target="_blank">{{sementicRes.link}}</a></div>
+                        <!-- <div style="margin-bottom: 15px; color: #0056b3; font-size: 12px; cursor: pointer;">{{sementicRes.link}}</div> -->
+                        <div style="margin-bottom: 15px;" *ngIf="sementicRes.metadata && sementicRes.metadata.length">
+                            <span style="background: #F6F6F6;
+                            border: 1px solid #C9C9C9; border-radius: 6px; margin-right: 20px; padding: 5px" *ngFor="let metadata of sementicRes.metadata">
+                                <span>{{metadata[0]}}</span>: <span>{{metadata[1]}}</span>
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 20px;">{{sementicRes.data}}</div>
+                        <hr style="margin-bottom: 20px;">
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!showLoader && filters && filterKeys && filterKeys.length" class="sourceListDiv" style="margin-left: 15px; margin-top: 30px;">
+                <div style="margin-bottom: 15px; font-weight: 700;">
+                    Filters
+                </div>
+                <div style="border: 1px solid #DDDDDD;
+                border-radius: 10px;
+                background-color: #ffffff;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                width: 82%;">
+                    <div *ngFor="let key of filterKeys" style="margin-bottom: 15px;">
+                        <span style="font-size: 12px;
+                        font-weight: 700;">{{key}} : </span>
+                        <span>
+                            <select style="
+                            border-radius: 7px;
+                            color: black;
+                            height: 30px;
+                            margin-left: 5px; font-size: 12px; background-color: white;" [id]="key">
+                                <option *ngFor="let filter of filters[key]" [value]="filter">{{filter}}</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div style="margin-top: 50px; margin-bottom: 20px;">
+                        <span style="
+                        padding: 7px 15px 7px 15px;
+                        border-radius: 100px;
+                        background: #385EA8;
+                        color: #FFFFFF; font-size: 12px; cursor: pointer;" (click)="resetFilters()">Reset</span>
+                        <span style="
+                        padding: 7px 15px 7px 15px;
+                        border-radius: 100px;
+                        background: #385EA8;
+                        color: #FFFFFF; font-size: 12px; cursor: pointer; float: right;" (click)="submitFilters()">Submit</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

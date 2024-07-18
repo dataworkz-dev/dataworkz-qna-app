@@ -197,4 +197,24 @@ export class ApiService {
     }
   }
 
+  getSementicSearchAnswer(systemId: string, query: string) {
+    let url = this.environmentUrl + '/' + systemId + '/search?query=' + query;
+    const headersSet = new HttpHeaders({
+      'Accept': 'application/json',
+      'Authorization': this.authToken
+    });
+    return this.http.get(url, {headers: headersSet}).pipe(
+      catchError(err => {
+        this.loader.next(false);
+        if(err && err.status && err.status == 401) {
+          this.error.next('Please provide a correct token');
+          this.router.navigate(['list'])
+        } else {
+          this.error.next('something unexpected happened');
+        }
+        console.log('Handling error locally and rethrowing it...', err);
+        return of([]);
+      }));
+  }
+
 }
