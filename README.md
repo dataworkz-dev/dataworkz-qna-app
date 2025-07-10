@@ -70,12 +70,12 @@ You should store the id of the LLMProvider you wish to use to ask questions to. 
 ### Asking a question
 The API to ask a question to the Dataworkz QnA system is [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId}/answer](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-answer)
 
-This API needs the `systemId` of the QnA system you are targetting and the `llmProviderId` of the LLM to use. The example QnA application leverages this API to power the "Knowledge Search" page. The response of this API includes the response from the LLM as well as links to the authoritative sources that back up the answer.
+This API needs the `systemId` of the QnA system you are targetting and the `llmProviderId` of the LLM to use it. The example QnA application leverages this API to power the "Knowledge Search" page. The response of this API includes the response from the LLM as well as links to the authoritative sources that back up the answer.
 
 ### Question History
 The example QnA application provides a list of previously asked questions from a QnA system. This is a convenience method for users to look at previously answered questions. The following API is used - [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId)/questionshistory](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-history)
 
-#### Previously Answered Questions
+#### Previously Answered Questions 
 Dataworkz provides a list of previously answered questions along with additional scores and analysis on the quality of the answer. Read more about this here. The example QnA application uses this API to provide details on each answered question - [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId}/questions/{questionId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-questions-questionid)
 
 
