@@ -75,7 +75,7 @@ This API needs the `systemId` of the QnA system you are targetting and the `llmP
 ### Question History
 The example QnA application provides a list of previously asked questions from a QnA system. This is a convenience method for users to look at previously answered questions. The following API is used - [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId)/questionshistory](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-history)
 
-#### Previously Answered Questions
+#### Previously Answered Questions 
 Dataworkz provides a list of previously answered questions along with additional scores and analysis on the quality of the answer. Read more about this here. The example QnA application uses this API to provide details on each answered question - [https://ragapps.dataworkz.com/api/qna/v1/systems/{systemId}/questions/{questionId}](https://docs.dataworkz.com/product-docs/api#qna-v1-systems-systemid-questions-questionid)
 
 
