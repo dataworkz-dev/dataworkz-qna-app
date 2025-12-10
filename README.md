@@ -1,5 +1,5 @@
 # Running the Dataworkz Sample QnA Application
-This repo provides a sample QnA application powered by the Dataworkz RAG Builder that demonstrates the power of RAG on several datasets. In this section, we will show you how to get the sample QnA application running on your local machine.
+This repo provides a sample QnA application powered by the Dataworkz RAG Builder that demonstrates the power of RAG on several datasets. In this section, we will show you how to get the sample QnA application running on your local machine it is .
 Jump here to learn more about [Dataworkz RAG Builder](#what-is-dataworkz)
 
 1. Clone Repository dataworkz-qna-app using `git clone https://github.com/dataworkz-dev/dataworkz-qna-app.git` .
